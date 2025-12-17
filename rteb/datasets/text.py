@@ -77,11 +77,8 @@ class TextRetrievalDataset(RetrievalDataset):
             with open(self.relevance_file) as f:
                 for line in f:
                     data = json.loads(line)
-                    for key, value in data.items():
-                        if key not in relevant_docs:
-                            relevant_docs[key] = value
-                        else:
-                            relevant_docs[key].update(value)
+                    relevant_docs[data["query-id"]] = {}
+                    relevant_docs[data["query-id"]][data["corpus-id"]] = data["score"]
         except FileNotFoundError:
             return {}
         return relevant_docs

@@ -120,7 +120,7 @@ class Encoder(LightningModule):
                 logger.debug(f"Opened embedding file for writing: {self.local_embd_file_name}")
 
     def predict_step(self, batch, batch_idx):
-        indices = batch["id"]
+        indices = batch["_id"]
 
         if self.load_embds and self.local_existing_ids:
             # Check if all items in this batch are already processed
